@@ -22,6 +22,7 @@ class CreateCarsTable extends Migration
             $table->bigInteger('owner_id')->unsigned();
             $table->foreign('owner_id')->references('id')->on('users');
             $table->boolean('is_rented')->default(False);
+            $table->boolean('visible')->default(1);
             $table->timestamps();
         });
     }

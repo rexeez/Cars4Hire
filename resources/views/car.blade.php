@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-2">
                 <p><b>Car Type:</b></p>
-                <p><b>Price/hour:</b></p>
+                <p><b>Price/day:</b></p>
                 <p><b>Owner:</b></p>
                 <p><b>Status:</b></p>
                 @if ($car->is_rented)
@@ -34,13 +34,32 @@
                 <input name="car_id" type="hidden" value="{{ $car->id }}">
                 <div class="mb-3">
                     <label for="start">Start Date</label>
-                    <input name="start" id="start" type="date" class="form-control">
+                    <input name="start" id="start" type="date" class="form-control @error('start') is-invalid @enderror">
+                    @error('start')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="end" class="mb-2">End Date</label>
-                    <input name="end" id="end" type="date" class="form-control mb-3">
+                    <input name="end" id="end" type="date" class="form-control mb-3 @error('end') is-invalid @enderror">
+                    @error('end')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        @endif
+        @if ($car->owner_id==auth()->user()->id)
+            <form action="/remove" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{ $car->id }}">
+                <button type="submit">
+                    Remove Car Listing
+                </button>
             </form>
         @endif
     </div>

@@ -26,6 +26,13 @@ Route::get('/login', [PageController::class, 'login']);
 Route::get('/register', [PageController::class, 'register']);
 Route::get('/car/{id}', [PageController::class, 'car']);
 
+Route::get('/history', [PageController::class, 'history']);
+
+Route::get('/schedule', [PageController::class, 'schedule']);
+
+Route::get('/editprofile', [UserController::class, 'formEditProfile']);
+
+Route::get('/list', [PageController::class, 'carList']);
 
 Route::post('/register', [UserController::class, 'register']);
 
@@ -36,6 +43,10 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
 
 Route::post('/rent', [CarController::class, 'store']);
+
+Route::post('/editprofile', [UserController::class, 'updateUser']);
+
+Route::post('/remove', [CarController::class, 'destroy']);
 
 Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('google/callback', [LoginController::class, 'handleGoogleCallback']);

@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container pt-3">
+    <h3>
+        LOGIN
+    </h3>
     <form action="/login" method="POST">
         @csrf
         <div class="mb-3">
