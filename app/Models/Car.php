@@ -12,7 +12,9 @@ class Car extends Model
     protected $fillable = [
         'type',
         'price',
-        'location',
+        'address',
+        'latitude',
+        'longitude',
         'image',
         'owner_id',
         'is_rented',

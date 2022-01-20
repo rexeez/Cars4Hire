@@ -15,10 +15,5 @@
     <h5>
         (Also if you haven't registered do that first.)
     </h5>
-    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-        <button class="btn text-light">
-            Secret button ooo
-        </button>
-    </a>
 </div>
 @endsection

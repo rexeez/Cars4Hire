@@ -11,6 +11,7 @@
                 <p><b>Car Type:</b></p>
                 <p><b>Price/day:</b></p>
                 <p><b>Owner:</b></p>
+                <p><b>Address:</b></p>
                 <p><b>Status:</b></p>
                 @if ($car->is_rented)
                     <p><b>Renter:</b></p>
@@ -20,6 +21,12 @@
                 <p>{{ $car->type }}</p>
                 <p>{{ $car->price }}</p>
                 <p>{{ $car->owner_name }}</p>
+                <div class="d-flex">
+                    <p>{{ $car->address }}</p>
+                    <a class="ms-2" href="{{ url("https://www.google.com/maps/search/?api=1&query=".$car->latitude."%2C".$car->longitude)}} ">
+                        See in Google Maps
+                    </a>
+                </div>
                 @if($car->is_rented)
                     <p>Rented</p>
                     <p>{{ $car->user_name }}</p>

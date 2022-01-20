@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Stevebauman\Location\Facades\Location;
 
 class CarController extends Controller
 {
@@ -41,10 +42,18 @@ class CarController extends Controller
 
         $path = $request->file('image')->storeAs('public/car', $generate_file);
 
+        $ip = request()->ip();
+        // dd($ip);
+        $position = Location::get('8.8.8.8');
+        // dd($position);
+
+
         $car = Car::create([
             'type' => $request->type,
             'price' => $request->price,
-            'location' => $request->location,
+            'address' => $request->address,
+            'latitude' => $position->latitude,
+            'longitude' => $position->longitude,
             'image' => $generate_file,
             'owner_id' => auth()->user()->id,
         ]);

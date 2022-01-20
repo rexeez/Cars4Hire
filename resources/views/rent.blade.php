@@ -14,8 +14,8 @@
                 <input name="price" id="price" type="text" class="form-control mb-3">
             </div>
             <div class="mb-3">
-                <label for="location" class="mb-2">Location</label>
-                <input name="location" id="location" type="text" class="form-control mb-3">
+                <label for="address" class="mb-2">Address</label>
+                <input name="address" id="address" type="text" class="form-control mb-3">
             </div>
             <div class="mb-3">
                 <label for="image">Sample Image</label>

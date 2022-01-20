@@ -17,7 +17,9 @@ class CreateCarsTable extends Migration
             $table->id();
             $table->string('type');
             $table->integer('price');
-            $table->string('location');
+            $table->string('address');
+            $table->float('latitude');
+            $table->float('longitude');
             $table->string('image');
             $table->bigInteger('owner_id')->unsigned();
             $table->foreign('owner_id')->references('id')->on('users');

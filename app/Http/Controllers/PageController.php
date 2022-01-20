@@ -40,6 +40,8 @@ class PageController extends Controller
     }
 
     function car($id){
+        // DB::enableQueryLog();
+
         if(DB::table('cars')->select('visible')->where('id', $id)->value('visible')==0){
             return redirect('/home');
         }
@@ -47,21 +49,20 @@ class PageController extends Controller
         if(DB::table('cars')->select('is_rented')->where('id', $id)->value('is_rented')==0){
             $car = DB::table('cars as c')
                     ->joinSub(DB::table('users')->select('id as id1', 'name as owner_name'), 'u1', 'owner_id', 'id1')
-                    ->select('c.id as id', 'c.image as image', 'c.type as type', 'c.owner_id as owner_id', 'c.price as price', 'owner_name', 'c.is_rented as is_rented')
+                    ->select('c.id as id', 'c.image as image', 'c.type as type', 'c.owner_id as owner_id', 'c.price as price', 'owner_name', 'c.address as address', 'c.latitude as latitude', 'c.longitude as longitude', 'c.is_rented as is_rented')
                     ->where('c.id', $id)
                     ->first();
         }
         else{
             $car = DB::table('cars as c')
                     ->joinSub(DB::table('users')->select('id as id1', 'name as owner_name'), 'u1', 'owner_id', 'id1')
-                    ->join('transactions as t', 't.id', 'car_id')
+                    ->join('transactions as t', 't.car_id', 'c.id')
                     ->joinSub(DB::table('users')->select('id as id2', 'name as user_name'), 'u2', 't.user_id', 'id2')
-                    ->select('car_id as id', 'c.image as image', 'c.type as type', 'c.price as price', 'c.owner_id as owner_id', 'owner_name', 'c.is_rented as is_rented', 'user_name')
-                    ->where('car_id', $id)
+                    ->select('car_id as id', 'c.image as image', 'c.type as type', 'c.price as price', 'c.owner_id as owner_id', 'owner_name', 'c.address as address', 'c.latitude as latitude', 'c.longitude as longitude', 'c.is_rented as is_rented', 'user_name')
+                    ->where('c.id', $id)
                     ->first();
 
         }
-
 
         return view('car', compact('car'));
     }
